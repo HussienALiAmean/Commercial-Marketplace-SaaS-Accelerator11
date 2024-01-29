@@ -172,7 +172,7 @@ if( $kv_check.reason -eq "AlreadyExists")
 	# Write-Host "Please delete existing instance or use new sql Instance name by using parameter" -NoNewline 
 	# Write-Host " -SQLServerName"   -ForegroundColor Green
     # exit 1
-}  
+#}  
 #endregion
 
 #region Dowloading assets if provided
