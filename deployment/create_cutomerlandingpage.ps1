@@ -409,10 +409,6 @@ Write-host "📜 Deploy Code"
 Write-host "   🔵 Deploy Code to Customer Portal"
 az webapp deploy --resource-group $ResourceGroupForDeployment --name $WebAppNamePortal --src-path "../Publish/CustomerSite.zip" --type zip --output $azCliOutput
 
-Write-host "   🔵 Clean up"
-# Remove-Item -Path ../src/AdminSite/appsettings.Development.json
-# Remove-Item -Path script.sql
-#Remove-Item -Path ../Publish -recurse -Force
 
 #endregion
 
