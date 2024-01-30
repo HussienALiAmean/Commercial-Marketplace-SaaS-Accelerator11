@@ -10,10 +10,11 @@
 # -Location "<region>" `
 # -PublisherAdminUsers "<your@email.address>"
 
+write-Host "starting to deffine parametenrs"
 Param(  
    [string][Parameter(Mandatory)]$WebAppNamePrefix, # Prefix used for creating web applications
    [string][Parameter(Mandatory)]$WebAppNameService, # web service plane that must be exsist for creating web applications
-   [string][Parameter()]$ResourceGroupForDeployment, # Name of the resource group to deploy the resources
+   [string][Parameter(Mandatory)]$ResourceGroupForDeployment, # Name of the resource group to deploy the resources
    [string][Parameter(Mandatory)]$Location, # Location of the resource group
    [string][Parameter(Mandatory)]$PublisherAdminUsers, # Provide a list of email addresses (as comma-separated-values) that should be granted access to the Publisher Portal
    [string][Parameter()]$TenantID, # The value should match the value provided for Active Directory TenantID in the Technical Configuration of the Transactable Offer in Partner Center
@@ -83,7 +84,7 @@ if(!($KeyVault -match "^[a-zA-Z][a-z0-9-]+$")) {
     exit 1
 }
 if ($WebAppNameService -eq "") {
-	Write-Host "you must enter a SERVICE PlANE NAME Please run it agine with service palne name  "
+	Throw " 🛑 you must enter a SERVICE PlANE NAME Please run it agine with service palne name."
     exit 1; 
 }
 
