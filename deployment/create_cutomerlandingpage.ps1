@@ -10,7 +10,6 @@
 # -Location "<region>" `
 # -PublisherAdminUsers "<your@email.address>"
 
-write-Host "starting to deffine parametenrs"
 Param(  
    [string][Parameter(Mandatory)]$WebAppNamePrefix, # Prefix used for creating web applications
    [string][Parameter(Mandatory)]$WebAppNameService, # web service plane that must be exsist for creating web applications
@@ -46,15 +45,15 @@ if ($ResourceGroupForDeployment -eq "") {
 # if ($SQLServerName -eq "") {
     # $SQLServerName = $WebAppNamePrefix + "-sql"
 # }
-if ($SQLAdminLogin -eq "") {
-    $SQLAdminLogin = "saasdbadmin" + $(Get-Random -Minimum 1 -Maximum 1000)
-}
-if ($SQLAdminLoginPassword -eq "") {
-    $SQLAdminLoginPassword = ([System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((New-Guid))))+"="
-}
-if ($SQLDatabaseName -eq "") {
-    $SQLDatabaseName = "AMPSaaSDB"
-}
+# if ($SQLAdminLogin -eq "") {
+    # $SQLAdminLogin = "saasdbadmin" + $(Get-Random -Minimum 1 -Maximum 1000)
+# }
+# if ($SQLAdminLoginPassword -eq "") {
+    # $SQLAdminLoginPassword = ([System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((New-Guid))))+"="
+# }
+# if ($SQLDatabaseName -eq "") {
+    # $SQLDatabaseName = "AMPSaaSDB"
+# }
 if($KeyVault -eq "")
 {
    $KeyVault=$WebAppNamePrefix+"-kv"
@@ -67,14 +66,14 @@ $azCliOutput = if($Quiet){'none'} else {'json'}
 
 #region Validate Parameters
 
-if($SQLAdminLogin.ToLower() -eq "admin") {
-    Throw "🛑 SQLAdminLogin may not be 'admin'."
-    exit 1
-}
-if($SQLAdminLoginPassword.Length -lt 8) {
-    Throw "🛑 SQLAdminLoginPassword must be at least 8 characters."
-    exit 1
-}
+# if($SQLAdminLogin.ToLower() -eq "admin") {
+    # Throw "🛑 SQLAdminLogin may not be 'admin'."
+    # exit 1
+# }
+# if($SQLAdminLoginPassword.Length -lt 8) {
+    # Throw "🛑 SQLAdminLoginPassword must be at least 8 characters."
+    # exit 1
+# }
 if($WebAppNamePrefix.Length -gt 21) {
     Throw "🛑 Web name prefix must be less than 21 characters."
     exit 1
