@@ -410,10 +410,19 @@ Write-host "   🔵 Deploy Code to Customer Portal"
 az webapp deploy --resource-group $ResourceGroupForDeployment --name $WebAppNamePortal --src-path "../Publish/CustomerSite.zip" --type zip --output $azCliOutput
 
 Write-host "   🔵 Clean up"
-Remove-Item -Path ../src/AdminSite/appsettings.Development.json
-Remove-Item -Path script.sql
+# Remove-Item -Path ../src/AdminSite/appsettings.Development.json
+# Remove-Item -Path script.sql
 #Remove-Item -Path ../Publish -recurse -Force
 
+#endregion
+
+#region add castomer site landingpage redirect url to appregestartion 
+ Write-Host "starting add https://"+$WebAppNamePrefix+"-portal.azurewebsites.net/Home/Index  TO SSO AAD appregisetration" 
+ $azureADApp = Get-AzADApplication -ApplicationId  $ADMTApplicationID
+ $azureADAppReplyUrls = $azureADApp.ReplyUrls
+ $azureADAppReplyUrls += "https://"+$WebAppNamePrefix+"-portal.azurewebsites.net/Home/Index"
+ Set-AzADApplication -ApplicationId $ADMTApplicationID -ReplyUrls $azureADAppReplyUrls
+ Write-Host "addning a url Done" 
 #endregion
 
 #region Present Output
